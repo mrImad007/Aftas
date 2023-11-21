@@ -3,15 +3,13 @@ package com.example.sb.resource;
 import com.example.sb.model.dto.AdminDto;
 import com.example.sb.model.dto.AdminRequest;
 import com.example.sb.service.Impl.AdminManagerApplication;
-import com.example.sb.model.Entities.Admin;
-import jakarta.enterprise.inject.New;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/admin")
+@RequestMapping(path = "api/v1/admins")
 public class AdminResource {
     private final AdminManagerApplication adminService;
     @Autowired

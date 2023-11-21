@@ -1,5 +1,6 @@
 package com.example.sb.model.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
@@ -21,6 +22,7 @@ public class Centre {
     private String name;
 
     @OneToMany
+    @JsonManagedReference
     private List<Admin> admin;
 
 }

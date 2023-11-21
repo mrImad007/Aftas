@@ -81,7 +81,7 @@ public class AdminManagerApplication {
             Admin adminEntity = adminOptional.get();
             return adminMapper.mapTo(adminEntity);
         } else {
-
             return null;
-        }    }
+        }
+    }
 }

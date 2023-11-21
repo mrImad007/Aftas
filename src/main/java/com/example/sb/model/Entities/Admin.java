@@ -1,4 +1,5 @@
 package com.example.sb.model.Entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
@@ -19,6 +20,7 @@ public class Admin {
     private String password;
     @ManyToOne
     @JoinColumn(name = "id_centre")
+    @JsonBackReference
     private Centre centre;
 
 }

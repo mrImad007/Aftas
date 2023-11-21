@@ -7,6 +7,8 @@ package com.example.sb.resource;
         import com.example.sb.service.Impl.PromotionManagerApplicationImpl;
         import lombok.AllArgsConstructor;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.web.bind.annotation.GetMapping;
+        import org.springframework.web.bind.annotation.PathVariable;
         import org.springframework.web.bind.annotation.RequestMapping;
         import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +21,10 @@ public class PromotionResource extends Resource<PromotionsDto, PromotionRequest,
             PromotionManagerApplicationImpl service) {
         this.service = service;
     }
+    private final PromotionManagerApplicationImpl promotionService;
 
+    @GetMapping("{promotion_id}")
+    public PromotionsDto findResource(@PathVariable("id") Long id) {
+        return promotionService.find(id);
+    }
 }
