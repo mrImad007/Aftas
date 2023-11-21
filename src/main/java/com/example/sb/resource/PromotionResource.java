@@ -24,7 +24,7 @@ public class PromotionResource extends Resource<PromotionsDto, PromotionRequest,
     private final PromotionManagerApplicationImpl promotionService;
 
     @GetMapping("{promotion_id}")
-    public PromotionsDto findResource(@PathVariable("id") Long id) {
-        return promotionService.find(id);
+    public boolean findResource(@PathVariable("id") Long id) {
+        return promotionService.isExist(id);
     }
 }

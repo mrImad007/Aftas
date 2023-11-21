@@ -44,7 +44,6 @@ public class ResponsableManagerApplicationImpl implements ResponsableManagerAppl
     @Override
     public ResponsableDto update(final Long id, final ResponsableDto responsableDto) {
         responsableDto.setId(id);
-        //return save(responsableDto);
         return null;
     }
 
@@ -54,7 +53,7 @@ public class ResponsableManagerApplicationImpl implements ResponsableManagerAppl
     }
 
     @Override
-    public ResponsableDto find(final Long id) {
+    public ResponsableDto find(Long id) {
         var optionalEntity = repository.findById(id);
         return optionalEntity.isPresent() ?
                 responsablemapper.mapTo(optionalEntity.get())

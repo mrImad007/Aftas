@@ -31,7 +31,6 @@ public class AdminManagerApplication {
         this.adminMapper = adminMapper;
     }
     public List<AdminDto> getAdmins(){
-
         return adminRepository.findAll().stream().map(adminMapper::mapTo).collect(Collectors.toList());
     }
 

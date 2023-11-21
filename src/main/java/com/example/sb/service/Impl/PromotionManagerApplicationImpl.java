@@ -9,9 +9,6 @@ package com.example.sb.service.Impl;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.beans.factory.annotation.Qualifier;
         import org.springframework.stereotype.Service;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.PathVariable;
-
         import java.util.List;
         import java.util.Optional;
         import java.util.stream.Collectors;
@@ -29,7 +26,7 @@ public class PromotionManagerApplicationImpl implements PromotionManagerApplicat
     }
     @Override
     public PromotionsDto save(PromotionRequest promotionRequest) {
-        Promotions PromotionEntity =promotionRequest.toModel();
+        Promotions PromotionEntity = promotionRequest.toModel();
         PromotionsDto createdPromotion = promotionmapper.mapTo(repository.save(PromotionEntity));
         return createdPromotion;
     }
