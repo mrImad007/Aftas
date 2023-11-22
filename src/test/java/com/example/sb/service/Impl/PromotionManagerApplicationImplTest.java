@@ -1,6 +1,6 @@
 package com.example.sb.service.Impl;
 
-import com.example.sb.model.Ennum.Statut;
+import com.example.sb.model.Enum.Statut;
 import com.example.sb.model.Entities.Categories;
 import com.example.sb.model.Entities.Produits;
 import com.example.sb.model.Entities.Promotions;
@@ -76,34 +76,23 @@ public class PromotionManagerApplicationImplTest {
                 .quantity(10)
                 .build();
 
-        // Mock repository save method
         when(repository.save(any())).thenReturn(promotionEntity);
 
-        // Mock mapper
         when(promotionMapper.mapTo(any())).thenReturn(expectedPromotionDto);
 
-        // Perform the save operation
         PromotionsDto actualPromotionDto = promotionManager.save(promotionRequest);
 
-        // Verify that the save method of the repository was called with the expected entity
         verify(repository, times(1)).save(any(Promotions.class));
 
-        // Verify that the mapper's mapTo method was called with the expected entity
         verify(promotionMapper, times(1)).mapTo(any());
 
-        // Verify the result
         assertEquals(expectedPromotionDto, actualPromotionDto);
     }
 
     @Test
     public void testDelete() {
-        // Mock data
         Long promotionId = 1L;
-
-        // Call the service method
         promotionManager.delete(promotionId);
-
-        // Verify that the repository deleteById method was called with the correct argument
         verify(repository).deleteById(promotionId);
     }
 }

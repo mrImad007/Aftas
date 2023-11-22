@@ -1,9 +1,13 @@
 
 package com.example.sb.service.Impl;
+        import com.example.sb.model.Entities.Categories;
+        import com.example.sb.model.Entities.Produits;
         import com.example.sb.model.Entities.Promotions;
         import com.example.sb.model.dto.PromotionRequest;
         import com.example.sb.model.dto.PromotionsDto;
         import com.example.sb.model.mappers.Mapper;
+        import com.example.sb.repo.CategoryRepository;
+        import com.example.sb.repo.ProductRepository;
         import com.example.sb.repo.PromotionRepository;
         import com.example.sb.service.PromotionManagerApplication;
         import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +20,48 @@ package com.example.sb.service.Impl;
 @Service
 public class PromotionManagerApplicationImpl implements PromotionManagerApplication {
     private final PromotionRepository repository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
     private final Mapper<Promotions, PromotionsDto> promotionmapper;
     @Autowired
     public PromotionManagerApplicationImpl(
             PromotionRepository repository,
-            @Qualifier("promotionMapper") Mapper<Promotions, PromotionsDto> promotionmapper) {
+            CategoryRepository categoryRepository,
+            ProductRepository productRepository, @Qualifier("promotionMapper") Mapper<Promotions, PromotionsDto> promotionmapper) {
         this.repository = repository;
+        this.productRepository = productRepository;
         this.promotionmapper = promotionmapper;
+        this.categoryRepository = categoryRepository;
     }
     @Override
     public PromotionsDto save(PromotionRequest promotionRequest) {
-        Promotions PromotionEntity = promotionRequest.toModel();
-        PromotionsDto createdPromotion = promotionmapper.mapTo(repository.save(PromotionEntity));
-        return createdPromotion;
+        try {
+            System.out.println("Before save - PromotionRequest: " + promotionRequest);
+
+
+            Categories categoriesEntity = categoryRepository.findById(promotionRequest.getCategorie_id())
+                    .orElseThrow(() -> new RuntimeException("Categories not found"));
+
+            Produits produitsEntity = productRepository.findById(promotionRequest.getCategorie_id())
+                    .orElseThrow(() -> new RuntimeException("product not found"));
+
+//            System.out.println("the product price:: "+ produitsEntity.getPrice());
+
+
+            Promotions promotionsEntity = promotionRequest.toModel();
+            promotionsEntity.setCategorie(categoriesEntity);
+
+            System.out.println("Before save - Promotions: " + promotionsEntity);
+
+            PromotionsDto createdPromotion = promotionmapper.mapTo(repository.save(promotionsEntity));
+            return createdPromotion;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to add promotion");
+        }
     }
+
+
 
     @Override
     public List<PromotionsDto> getAll() {

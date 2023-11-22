@@ -7,10 +7,7 @@ package com.example.sb.resource;
         import com.example.sb.service.Impl.PromotionManagerApplicationImpl;
         import lombok.AllArgsConstructor;
         import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.PathVariable;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RestController;
+        import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -27,4 +24,17 @@ public class PromotionResource extends Resource<PromotionsDto, PromotionRequest,
     public boolean findResource(@PathVariable("id") Long id) {
         return promotionService.isExist(id);
     }
+
+    @PostMapping("/add_promotion")
+    public PromotionsDto add_promotion(@RequestBody PromotionRequest promotionRequest) {
+        try {
+            PromotionsDto createdPromotion = promotionService.save(promotionRequest);
+            return createdPromotion;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to add promotion");
+        }
+    }
+
+
 }

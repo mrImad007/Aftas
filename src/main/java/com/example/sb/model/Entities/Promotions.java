@@ -1,5 +1,5 @@
 package com.example.sb.model.Entities;
-import com.example.sb.model.Ennum.Statut;
+import com.example.sb.model.Enum.Statut;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
@@ -21,13 +21,14 @@ public class Promotions {
     @ManyToOne
     @JoinColumn(name = "id_responsable")
     private Responsable responsable;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_categorie")
     private Categories categorie;
     @ManyToOne
     @JoinColumn(name = "id_produit")
     private Produits produit;
     private LocalDate datepromo;
+    private Long reduction;
     @Enumerated(EnumType.STRING)
     private Statut statut;
     private Integer quantity;

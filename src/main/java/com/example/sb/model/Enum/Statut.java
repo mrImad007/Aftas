@@ -1,4 +1,4 @@
-package com.example.sb.model.Ennum;
+package com.example.sb.model.Enum;
 
 public enum Statut {
     ACCEPTED,

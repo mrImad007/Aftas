@@ -1,6 +1,6 @@
 package com.example.sb.model.dto;
 
-        import com.example.sb.model.Ennum.Statut;
+        import com.example.sb.model.Enum.Statut;
         import com.example.sb.model.Entities.*;
         import jakarta.persistence.Column;
         import jakarta.validation.constraints.Email;
