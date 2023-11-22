@@ -1,0 +1,409 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Admin {
+  - id: Long
+  - centre: Centre
+  - password: String
+  - email: String
+  + builder(): AdminBuilder
+  + toString(): String
+   password: String
+   id: Long
+   email: String
+   centre: Centre
+}
+class AdminDto {
+  - email: String
+  - centre: Centre
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + builder(): AdminDtoBuilder
+   email: String
+   centre: Centre
+}
+class AdminManagerApplication {
+  + deleteAdmin(Long): void
+  + getAdminByEmail(String): AdminDto
+  + addNewAdmin(Admin): void
+  + updateAdmin(Long, String, String): void
+   admins: List<AdminDto>
+}
+class AdminMapper {
+  + mapTo(Admin): AdminDto
+  + mapFrom(AdminDto): Admin
+}
+class AdminNotFoundException
+interface AdminRepository << interface >> {
+  + findAllByEmail(String): List<Admin>
+  + findByEmail(String): Optional<Admin>
+}
+class AdminRequest {
+  - centre_id: long
+  - password: String
+  - email: String
+  + toString(): String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + builder(): AdminRequestBuilder
+  + toModel(): Admin
+   email: String
+   password: String
+   centre_id: long
+}
+class AdminResource {
+  + deletAdmin(Long): void
+  + registerNewAdmin(AdminRequest): void
+  + updateAdmin(Long, String, String): void
+  + getAdminByEmail(String): AdminDto
+   admins: List<AdminDto>
+}
+class Categories {
+  - rayon: Rayon
+  - id: Long
+  - categorie: String
+  + toString(): String
+  + builder(): CategoriesBuilder
+   id: Long
+   rayon: Rayon
+   categorie: String
+}
+class CategoriesDto {
+  - id: Long
+  - rayon: Rayon
+  - categorie: String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + builder(): CategoriesDtoBuilder
+  + toString(): String
+   id: Long
+   rayon: Rayon
+   categorie: String
+}
+class CategoriesMapper {
+  + mapTo(Categories): CategoriesDto
+  + mapFrom(CategoriesDto): Categories
+}
+interface CategoryRepository << interface >> {
+  + findById(Long): Optional<Categories>
+}
+interface CenterRepository << interface >>
+class Centre {
+  - name: String
+  - id: Long
+  - admin: List<Admin>
+  + toString(): String
+  + builder(): CentreBuilder
+   name: String
+   id: Long
+   admin: List<Admin>
+}
+class CentreDto {
+  - name: String
+  - id: Long
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + builder(): CentreDtoBuilder
+   name: String
+   id: Long
+}
+class CentreMapper {
+  + mapFrom(CentreDto): Centre
+  + mapTo(Centre): CentreDto
+}
+interface Mapper<Entity, Dto> << interface >> {
+  + mapFrom(Dto): Entity
+  + mapTo(Entity): Dto
+}
+class MapperConfig {
+  ~ modelMapper(): ModelMapper
+}
+interface ProductRepository << interface >> {
+  + findById(Long): Optional<Produits>
+}
+class Produits {
+  - produit: String
+  - categorie: Categories
+  - id: Long
+  - price: Long
+  + builder(): ProduitsBuilder
+  + toString(): String
+  # canEqual(Object): boolean
+  + equals(Object): boolean
+  + hashCode(): int
+   price: Long
+   id: Long
+   categorie: Categories
+   produit: String
+}
+class ProduitsDto {
+  - categorie: Categories
+  - id: Long
+  - produit: String
+  + toString(): String
+  + equals(Object): boolean
+  + builder(): ProduitsDtoBuilder
+  # canEqual(Object): boolean
+  + hashCode(): int
+   id: Long
+   categorie: Categories
+   produit: String
+}
+class ProduitsMapper {
+  + mapTo(Produits): ProduitsDto
+  + mapFrom(ProduitsDto): Produits
+}
+interface PromotionManagerApplication << interface >>
+class PromotionManagerApplicationImpl {
+  + find(Long): PromotionsDto
+  + deleteAll(): void
+  + partialUpdate(Long, PromotionsDto): PromotionsDto
+  + isExist(Long): boolean
+  + save(PromotionRequest): PromotionsDto
+  + delete(Long): void
+  + update(Long, PromotionsDto): PromotionsDto
+   all: List<PromotionsDto>
+}
+class PromotionMapper {
+  + mapTo(Promotions): PromotionsDto
+  + mapFrom(PromotionsDto): Promotions
+}
+interface PromotionRepository << interface >>
+class PromotionRequest {
+  - datepromo: LocalDate
+  - quantity: Integer
+  - categorie_id: Long
+  - statut: Statut
+  - responsable_id: Long
+  - produit_id: Long
+  + toString(): String
+  # canEqual(Object): boolean
+  + equals(Object): boolean
+  + builder(): PromotionRequestBuilder
+  + hashCode(): int
+  + toModel(): Promotions
+   responsable_id: Long
+   quantity: Integer
+   datepromo: LocalDate
+   categorie_id: Long
+   produit_id: Long
+   statut: Statut
+}
+class PromotionResource {
+  + findResource(Long): boolean
+  + add_promotion(PromotionRequest): PromotionsDto
+   service: PromotionManagerApplicationImpl
+}
+class Promotions {
+  - reduction: Long
+  - id: Long
+  - datepromo: LocalDate
+  - produit: Produits
+  - responsable: Responsable
+  - quantity: Integer
+  - categorie: Categories
+  - statut: Statut
+  + toString(): String
+  + builder(): PromotionsBuilder
+   quantity: Integer
+   datepromo: LocalDate
+   produit: Produits
+   reduction: Long
+   id: Long
+   categorie: Categories
+   responsable: Responsable
+   statut: Statut
+}
+class PromotionsDto {
+  - categorie: Categories
+  - id: Long
+  - statut: Statut
+  - produit: Produits
+  - datepromo: LocalDate
+  - responsable: Responsable
+  - quantity: Integer
+  + toString(): String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + builder(): PromotionsDtoBuilder
+   quantity: Integer
+   datepromo: LocalDate
+   produit: Produits
+   id: Long
+   categorie: Categories
+   responsable: Responsable
+   statut: Statut
+}
+class Rayon {
+  - name: String
+  - id: Long
+  + toString(): String
+  + builder(): RayonBuilder
+   name: String
+   id: Long
+}
+class RayonDto {
+  - id: Long
+  - name: String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + builder(): RayonDtoBuilder
+   name: String
+   id: Long
+}
+class RayonMapper {
+  + mapFrom(RayonDto): Rayon
+  + mapTo(Rayon): RayonDto
+}
+class Resource<Dto, DtoRequest, Identifier> {
+  + delete(Identifier): ResponseEntity<Void>
+  + find(Identifier): ResponseEntity<Dto>
+  + deleteAll(): ResponseEntity<Void>
+  + update(Identifier, Dto): ResponseEntity<Dto>
+  + save(DtoRequest): ResponseEntity<DtoRequest>
+  + partialUpdate(Identifier, Dto): ResponseEntity<Dto>
+   all: List<Dto>
+}
+class Responsable {
+  - password: String
+  - admin: Admin
+  - rayon: Rayon
+  - email: String
+  - id: Long
+  + toString(): String
+  + builder(): ResponsableBuilder
+   password: String
+   rayon: Rayon
+   id: Long
+   email: String
+   admin: Admin
+}
+class ResponsableDto {
+  - email: String
+  - rayon: RayonDto
+  - password: String
+  - admin: Admin
+  - id: Long
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + equals(Object): boolean
+  + toString(): String
+  + builder(): ResponsableDtoBuilder
+   password: String
+   rayon: RayonDto
+   id: Long
+   email: String
+   admin: Admin
+}
+interface ResponsableManagerApplication << interface >>
+class ResponsableManagerApplicationImpl {
+  + partialUpdate(Long, ResponsableDto): ResponsableDto
+  + save(ResponsableRequest): ResponsableDto
+  + update(Long, ResponsableDto): ResponsableDto
+  + delete(Long): void
+  + isExist(Long): boolean
+  + find(Long): ResponsableDto
+  + deleteAll(): void
+   all: List<ResponsableDto>
+}
+class ResponsableMapper {
+  + mapTo(Responsable): ResponsableDto
+  + mapFrom(ResponsableDto): Responsable
+}
+interface ResponsableRepository << interface >> {
+  + findAllByAdmin(Admin): List<Responsable>
+  + findByEmail(String): Optional<Responsable>
+  + findAllByRayon(Rayon): List<Responsable>
+  + findAllByEmail(String): List<Responsable>
+}
+class ResponsableRequest {
+  - admin_id: Long
+  - password: String
+  - rayon_id: Long
+  - email: String
+  + builder(): ResponsableRequestBuilder
+  + toString(): String
+  # canEqual(Object): boolean
+  + equals(Object): boolean
+  + hashCode(): int
+  + toModel(): Responsable
+   password: String
+   email: String
+   rayon_id: Long
+   admin_id: Long
+}
+class ResponsableResource {
+   service: ResponsableManagerApplicationImpl
+}
+class SbApplication {
+  + main(String[]): void
+}
+interface Service<Dto, DtoRequest, Identifier> << interface >> {
+  + update(Identifier, Dto): Dto
+  + partialUpdate(Identifier, Dto): Dto
+  + save(DtoRequest): Dto
+  + find(Identifier): Dto
+  + deleteAll(): void
+  + delete(Identifier): void
+  + isExist(Identifier): boolean
+   all: List<Dto>
+}
+enum Statut << enumeration >> {
+  + values(): Statut[]
+  + valueOf(String): Statut
+}
+class SupAdmin {
+  - id: Long
+  - email: String
+  - password: String
+  + toString(): String
+  + builder(): SupAdminBuilder
+   id: Long
+   email: String
+   password: String
+}
+class SupAdminDto {
+  - email: String
+  - password: String
+  - id: Long
+  + builder(): SupAdminDtoBuilder
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + toString(): String
+  + hashCode(): int
+   id: Long
+   email: String
+   password: String
+}
+class SuperAdminMapper {
+  + mapTo(SupAdmin): SupAdminDto
+  + mapFrom(SupAdminDto): SupAdmin
+}
+
+AdminMapper                        -[#008200,dashed]-^  Mapper                            
+CategoriesMapper                   -[#008200,dashed]-^  Mapper                            
+CentreMapper                       -[#008200,dashed]-^  Mapper                            
+ProduitsMapper                     -[#008200,dashed]-^  Mapper                            
+PromotionManagerApplication        -[#008200,plain]-^  Service                           
+PromotionManagerApplicationImpl    -[#008200,dashed]-^  PromotionManagerApplication       
+PromotionMapper                    -[#008200,dashed]-^  Mapper                            
+PromotionResource                  -[#000082,plain]-^  Resource                          
+RayonMapper                        -[#008200,dashed]-^  Mapper                            
+ResponsableManagerApplication      -[#008200,plain]-^  Service                           
+ResponsableManagerApplicationImpl  -[#008200,dashed]-^  ResponsableManagerApplication     
+ResponsableMapper                  -[#008200,dashed]-^  Mapper                            
+ResponsableResource                -[#000082,plain]-^  Resource                          
+SuperAdminMapper                   -[#008200,dashed]-^  Mapper                            
+@enduml
