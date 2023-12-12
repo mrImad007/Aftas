@@ -1,4 +1,4 @@
-package com.example.aftas.model.mappers.Impl;
+package com.example.aftas.model.mappers.Implementation;
 
 import com.example.aftas.model.Entities.Member;
 import com.example.aftas.model.dto.MemberDto;

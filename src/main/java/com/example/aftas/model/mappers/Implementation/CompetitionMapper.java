@@ -1,4 +1,4 @@
-package com.example.aftas.model.mappers.Impl;
+package com.example.aftas.model.mappers.Implementation;
 
 import com.example.aftas.model.Entities.Competition;
 import com.example.aftas.model.dto.CompetitionDto;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CompetitionMapper implements Mapper<Competition, CompetitionDto> {
-    public final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public CompetitionMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
