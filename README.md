@@ -1,7 +1,7 @@
-#Aftas
+#  Aftas
 Une application de gestion des compétitions de chasse sous-marine(AFTAS)
 
-#Contexte du projet
+# Contexte du projet
 Aftas est un club de sports à Tiznit, situé exactement à Mirleft, il propose un ensemble de services et d'activités : Surf, Tennis, Quad, Pêche sous-marine, Parapente, et autres.
 
 ​
@@ -56,7 +56,7 @@ L’application doit aussi enregistrer les résultats de tous les participants.
 
 ​
 
-#Exigences Téchniques:
+# Exigences Téchniques:
 
 ​
 
@@ -78,7 +78,7 @@ Utilisation d’angular pour fournir les interfaces utilisateurs.
 
 ​
 
-#Exigences fonctionelles:
+# Exigences fonctionelles:
 
 ​
 
@@ -96,7 +96,7 @@ Respect et vérification des règles mentionnées dans le cahier des charges
 
 ​
 
-#Modalités pédagogiques
+# Modalités pédagogiques
 ○ Travail individuel.
 
 ○ Début: 08/12/2023.
@@ -111,10 +111,10 @@ o Exploration du code de l’API (10 minutes)
 o Explication des components Angular. (10 minutes)
 o Evaluation des savoirs et mise en situation (10 minutes)
 
-#Livrables
+# Livrables
 Le code source complet en GitHub organisé et documenté.
 
-#Critères de performance
+# Critères de performance
 Utilisation d'un outil de gestion de projets (trello, jira ....)
 Une bonne qualité du code et structure du projet
 L'interface doit répondre à la demande d'expression de besoin (fonctionnelle et adaptative)
