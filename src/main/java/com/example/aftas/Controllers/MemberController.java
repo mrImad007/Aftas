@@ -1,10 +1,9 @@
-package com.example.aftas.resource;
+package com.example.aftas.Controllers;
 
 import com.example.aftas.model.dto.MemberDto;
-import com.example.aftas.service.Impl.MemberService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.aftas.Services.Impl.MemberService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,9 @@ public class MemberController {
     @GetMapping
     public List<MemberDto> getAllMembers(){
         return memberService.getAllMembers();
+    }
+    @GetMapping("{num}")
+    public ResponseEntity<Object> getMemberByNum(@PathVariable("num") Integer num){
+        return memberService.getMemberbyNum(num);
     }
 }

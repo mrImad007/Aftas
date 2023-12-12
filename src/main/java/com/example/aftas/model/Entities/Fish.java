@@ -13,7 +13,7 @@ import java.util.List;
 @NonNull
 public class Fish {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
     private float averageWeight;
     @OneToMany(mappedBy = "fish")

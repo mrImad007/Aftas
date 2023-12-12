@@ -2,6 +2,7 @@ package com.example.aftas.model.Entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class Level {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Integer code;
     private String description;
     private Integer points;

@@ -39,35 +39,9 @@ public class MemberRequest {
     @NotEmpty(message = "Nationality number must be provided")
     @Column(unique = true)
     private String identityNumber;
+    @NotEmpty(message = "ranking id number must be provided")
     private Integer ranking_id;
+    @NotEmpty(message = "hunting id number must be provided")
     private Integer hunting_id;
-
-
-
-    /*public Member toModel(){
-        List<Ranking> rankingList = new ArrayList<>();
-        List<Hunting> huntingList = new ArrayList<>();
-        if (ranking_id != null) {
-            Ranking ranking = Ranking.builder().id(ranking_id).build();
-            rankingList.add(ranking);
-        }
-
-        if (hunting_id != null) {
-            Hunting hunting = Hunting.builder().id(hunting_id).build();
-            huntingList.add(hunting);
-        }
-        return Member
-                .builder()
-                .num(num)
-                .name(name)
-                .familyName(familyName)
-                .accessionDate(accessionDate)
-                .nationality(nationality)
-                .identityDocumentType(identityDocumentType)
-                .identityNumber(identityNumber)
-                .rankings(rankingList)
-                .huntings(huntingList)
-                .build();
-    }*/
 
 }

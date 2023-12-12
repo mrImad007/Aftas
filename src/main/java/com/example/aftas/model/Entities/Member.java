@@ -13,7 +13,7 @@ import java.util.*;
 @NonNull
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer num;
     private String name;
     private String familyName;

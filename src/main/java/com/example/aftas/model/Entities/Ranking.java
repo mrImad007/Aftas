@@ -12,7 +12,7 @@ import lombok.*;
 @NonNull
 public class Ranking {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "member_id")

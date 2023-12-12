@@ -1,4 +1,4 @@
-package com.example.aftas.service;
+package com.example.aftas.Services;
 
 import java.util.List;
 public interface Service <Dto,DtoRequest,Identifier> {
