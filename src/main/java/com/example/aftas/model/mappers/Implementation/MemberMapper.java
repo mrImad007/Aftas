@@ -1,7 +1,7 @@
 package com.example.aftas.model.mappers.Implementation;
 
 import com.example.aftas.model.Entities.Member;
-import com.example.aftas.model.dto.MemberDto;
+import com.example.aftas.model.Dto.MemberDto;
 import com.example.aftas.model.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

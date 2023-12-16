@@ -1,7 +1,5 @@
-package com.example.aftas.model.dto;
+package com.example.aftas.model.Dto.Requests;
 
-import com.example.aftas.model.Entities.Competition;
-import com.example.aftas.model.Entities.Member;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

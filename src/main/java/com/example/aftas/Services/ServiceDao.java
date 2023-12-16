@@ -1,12 +1,9 @@
 package com.example.aftas.Services;
 
-import java.util.List;
-public interface Service <Dto,DtoRequest,Identifier> {
-    Dto save(final DtoRequest request);
-    List<Dto> getAll();
+public interface ServiceDao<Dto,Identifier> {
+    Dto save(final Dto dto);
     Dto update(final Identifier identifier, final Dto dto);
     void delete(final Identifier identifier);
-    Dto find(final Identifier identifier);
     Dto partialUpdate(final Identifier identifier, final Dto dto);
     boolean isExisting(final Identifier identifier);
     void deleteAll();

@@ -1,8 +1,9 @@
 package com.example.aftas.Controllers;
 
-import com.example.aftas.model.dto.CompetitionDto;
+import com.example.aftas.model.Dto.CompetitionDto;
 import com.example.aftas.Services.Impl.CompetitionService;
-import org.springframework.http.ResponseEntity;
+import com.example.aftas.model.Dto.Requests.CompetitionRequest;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,23 @@ public class CompetitionController {
         return competitionService.getAllCompetitions();
     }
     @GetMapping("/{code}")
-    public ResponseEntity<Object> findCompetitionByCode(@PathVariable("code") String code){
+    public CompetitionDto findCompetitionByCode(@PathVariable("code") @NotNull String code){
         return competitionService.getCompetitionByCode(code);
+    }
+    @PostMapping
+    public CompetitionDto save(@RequestBody @NotNull CompetitionRequest competitionRequest) {
+        if(competitionService.getCompetitionByCode(competitionRequest.getCode()) != null){
+            return null;
+        }
+        return competitionService.save(competitionRequest);
+    }
+    @DeleteMapping("/{code}")
+    public boolean deleteCompetition(@PathVariable("code") @NotNull String code){
+        if(competitionService.getCompetitionByCode(code) != null){
+            competitionService.deleteCompetition(code);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

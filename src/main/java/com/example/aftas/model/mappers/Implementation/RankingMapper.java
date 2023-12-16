@@ -1,7 +1,7 @@
 package com.example.aftas.model.mappers.Implementation;
 
 import com.example.aftas.model.Entities.Ranking;
-import com.example.aftas.model.dto.RankingDto;
+import com.example.aftas.model.Dto.RankingDto;
 import com.example.aftas.model.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

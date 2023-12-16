@@ -1,9 +1,7 @@
-package com.example.aftas.model.dto;
+package com.example.aftas.model.Dto.Requests;
 
 import com.example.aftas.model.Entities.Competition;
-import com.example.aftas.model.Entities.Hunting;
 import com.example.aftas.model.Entities.Member;
-import com.example.aftas.model.Entities.Ranking;
 import com.example.aftas.model.Enum.IdentityDocumentType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -13,9 +11,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -39,9 +35,17 @@ public class MemberRequest {
     @NotEmpty(message = "Nationality number must be provided")
     @Column(unique = true)
     private String identityNumber;
-    @NotEmpty(message = "ranking id number must be provided")
-    private Integer ranking_id;
-    @NotEmpty(message = "hunting id number must be provided")
-    private Integer hunting_id;
 
+    public Member toModel(){
+        return Member.
+                builder()
+                .num(this.num)
+                .name(this.name)
+                .familyName(this.familyName)
+                .accessionDate(this.accessionDate)
+                .nationality(this.nationality)
+                .identityDocumentType(this.identityDocumentType)
+                .identityNumber(this.identityNumber)
+                .build();
+    }
 }

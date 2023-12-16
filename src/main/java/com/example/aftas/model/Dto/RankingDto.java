@@ -1,4 +1,4 @@
-package com.example.aftas.model.dto;
+package com.example.aftas.model.Dto;
 
 import com.example.aftas.model.Entities.Competition;
 import com.example.aftas.model.Entities.Member;

@@ -1,6 +1,6 @@
 package com.example.aftas.Dao;
 
-import com.example.aftas.model.dto.MemberDto;
+import com.example.aftas.model.Dto.MemberDto;
 
 import java.util.List;
 

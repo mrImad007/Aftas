@@ -1,9 +1,10 @@
-package com.example.aftas.model.dto;
+package com.example.aftas.model.Dto;
 
 import com.example.aftas.model.Entities.Competition;
 import com.example.aftas.model.Entities.Hunting;
 import com.example.aftas.model.Entities.Ranking;
 import com.example.aftas.model.Enum.IdentityDocumentType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -21,7 +22,7 @@ public class MemberDto {
     private String name;
     @NotEmpty(message = "Family name must be provided")
     private String familyName;
-    @PastOrPresent(message = "Accession date must today's")
+    @PastOrPresent(message = "Accession date must be today's")
     @NotEmpty(message = "Accession date must be provided")
     private Date accessionDate;
     @NotEmpty(message = "Nationality must be provided")
@@ -32,6 +33,6 @@ public class MemberDto {
     @NotEmpty(message = "Nationality number must be provided")
     @Column(unique = true)
     private String identityNumber;
-    private List<Ranking> rankings;
-    private List<Hunting> huntings;
+    private List<Competition> competitions;
+
 }

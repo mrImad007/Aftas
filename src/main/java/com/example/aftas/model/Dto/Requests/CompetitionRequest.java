@@ -1,5 +1,8 @@
-package com.example.aftas.model.dto;
+package com.example.aftas.model.Dto.Requests;
 
+import com.example.aftas.model.Entities.Competition;
+import com.example.aftas.model.Entities.Hunting;
+import com.example.aftas.model.Entities.Ranking;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,7 +13,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -34,8 +39,17 @@ public class CompetitionRequest {
     private String location;
     @NotEmpty(message = "amount must be provided")
     private Double amount;
-    @NotEmpty(message = "ranking id number must be provided")
-    private Integer ranking_id;
-    @NotEmpty(message = "hunting id number must be provided")
-    private Integer hunting_id;
+    public Competition toModel(){
+
+        return Competition.
+                builder()
+                .code(this.code)
+                .date(this.date)
+                .startTime(this.startTime)
+                .endTime(this.endTime)
+                .numberOfParticipants(this.numberOfParticipants)
+                .location(this.location)
+                .amount(this.amount)
+                .build();
+    }
 }

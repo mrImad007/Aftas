@@ -1,7 +1,7 @@
 package com.example.aftas.model.mappers.Implementation;
 
 import com.example.aftas.model.Entities.Competition;
-import com.example.aftas.model.dto.CompetitionDto;
+import com.example.aftas.model.Dto.CompetitionDto;
 import com.example.aftas.model.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
