@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface LevelRepository extends JpaRepository<Level, Integer> {
-    Optional<Level> findLevelByCode(Integer code);
     Optional<Level> findLevelByDescription(String description);
     Optional<Level> findLevelByPoints(Integer points);
 

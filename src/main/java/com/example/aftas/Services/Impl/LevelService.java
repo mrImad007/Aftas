@@ -2,6 +2,7 @@ package com.example.aftas.Services.Impl;
 
 import com.example.aftas.Dao.LevelDao;
 import com.example.aftas.model.Dto.LevelDto;
+import com.example.aftas.model.Dto.Requests.LevelRequest;
 import com.example.aftas.model.Entities.Level;
 import com.example.aftas.model.Entities.Member;
 import com.example.aftas.model.mappers.Mapper;
@@ -37,6 +38,29 @@ public class LevelService implements LevelDao {
             return levelMapper.mapTo(levelOptional.get());
         }else{
             return null;
+        }
+    }
+
+    public LevelDto addLevel(LevelRequest levelRequest){
+        Optional<Level> levelOptional = levelRepository.findLevelByDescription(levelRequest.getDescription());
+        if (levelOptional.isPresent()){
+            return levelMapper.mapTo(levelRepository.save(levelRequest.toModel()));
+        }else {
+            return updateLevel(levelRequest);
+        }
+    }
+
+    public LevelDto updateLevel(LevelRequest levelRequest){
+        return levelMapper.mapTo(levelRepository.save(levelRequest.toModel()));
+    }
+
+    public boolean deleteLevel(String description){
+        Optional<Level> levelOptional = levelRepository.findLevelByDescription(description);
+        if (levelOptional.isPresent()){
+            levelRepository.delete(levelOptional.get());
+            return true;
+        }else {
+            return false;
         }
     }
 }
