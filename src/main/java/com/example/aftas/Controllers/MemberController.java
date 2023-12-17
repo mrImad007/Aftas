@@ -2,8 +2,10 @@ package com.example.aftas.Controllers;
 
 import com.example.aftas.model.Dto.MemberDto;
 import com.example.aftas.Services.Impl.MemberService;
+import com.example.aftas.model.Dto.RankingDto;
 import com.example.aftas.model.Dto.Requests.MemberRequest;
 import com.example.aftas.model.Entities.Member;
+import com.example.aftas.model.Entities.Ranking;
 import com.example.aftas.model.mappers.Mapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,23 +33,20 @@ public class MemberController {
         return memberService.getMemberByIdentityNumber(identity);
     }
     @GetMapping("/name/{name}")
-    public MemberDto getMemberByName(@PathVariable("name") String name){
+    public List<MemberDto> getMemberByName(@PathVariable("name") String name){
         return memberService.getMemberByName(name);
     }
     @GetMapping("/fname/{fname}")
-    public MemberDto getMemberByFamilyName(@PathVariable("fname") String fname){
+    public List<MemberDto> getMemberByFamilyName(@PathVariable("fname") String fname){
         return memberService.getMemberByFamilyName(fname);
+    }
+    @GetMapping("/code/{code}")
+    public List<RankingDto> findByCode(@PathVariable("code") String code){
+        return memberService.getCompetitionMembers(code);
     }
     @PostMapping
     public MemberDto saveMember(@RequestBody MemberRequest memberRequest){
-        MemberDto memberDto = memberService.getMemberByIdentityNumber(memberRequest.getIdentityNumber());
-        if (memberDto == null){
             return memberService.registerMember(memberRequest);
-        }
-        else{
-            System.out.println("member Already existing");
-            return null;
-        }
     }
     @PutMapping
     public MemberDto updateMember(@RequestBody MemberRequest memberRequest){

@@ -17,15 +17,18 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num")
     private Integer num;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String familyName;
+    @Column(nullable = false)
     private Date accessionDate;
     @Column(nullable = false)
     private String nationality;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private IdentityDocumentType identityDocumentType;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String identityNumber;
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

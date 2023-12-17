@@ -22,10 +22,12 @@ public class Fish {
     private float averageWeight;
     @OneToMany(mappedBy = "fish")
     @JsonManagedReference
+    @ToString.Exclude
     private List<Hunting> huntings;
     @ManyToOne
     @JoinColumn(name = "level_id")
     @JsonIgnore
+    @ToString.Exclude
     private Level level;
 
 }

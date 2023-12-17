@@ -46,5 +46,19 @@ public class FishService {
         fishRepository.deleteById(name);
     }
 
+    public boolean checkAverageWeight(String name, Double weight){
+        Optional<Fish> optionalFish = fishRepository.findByName(name);
+        if (optionalFish.isPresent()){
+            Fish fish = optionalFish.get();
+            if (weight >= fish.getAverageWeight()){
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
 
 }

@@ -21,4 +21,13 @@ public class Level {
     @OneToMany(mappedBy = "level")
     @JsonIgnore
     private List<Fish> fishes;
+
+    @Override
+    public String toString() {
+        return "Level{" +
+                "code=" + code +
+                ", description='" + description + '\'' +
+                ", points=" + points +
+                '}';
+    }
 }

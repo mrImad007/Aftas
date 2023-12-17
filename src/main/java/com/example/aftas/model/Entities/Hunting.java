@@ -18,16 +18,16 @@ public class Hunting {
     private Integer id;
     private Integer numberOfFish;
     @ManyToOne
-    @JoinColumn(name = "fish_id")
     @JsonIgnore
+    @ToString.Exclude
     private Fish fish;
     @ManyToOne
-    @JoinColumn(name = "member_id")
     @JsonIgnore
+    @ToString.Exclude
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "competition_id")
     @JsonIgnore
+    @ToString.Exclude
     private Competition competition;
 }

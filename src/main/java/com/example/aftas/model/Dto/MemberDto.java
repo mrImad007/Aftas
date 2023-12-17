@@ -33,6 +33,5 @@ public class MemberDto {
     @NotEmpty(message = "Nationality number must be provided")
     @Column(unique = true)
     private String identityNumber;
-    private List<Competition> competitions;
 
 }
