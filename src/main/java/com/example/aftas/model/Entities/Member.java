@@ -1,8 +1,7 @@
 package com.example.aftas.model.Entities;
 
 import com.example.aftas.model.Enum.IdentityDocumentType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.*;

@@ -15,6 +15,7 @@ public class Level {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
     private Integer code;
+    @Column(unique = true, name = "description")
     private String description;
     private Integer points;
     @OneToMany(mappedBy = "level")

@@ -1,9 +1,7 @@
 package com.example.aftas.model.Entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
@@ -12,16 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class Ranking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @EmbeddedId
+    private RankingId rankingId;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_id")
+    @MapsId("member_num")
     @JsonIgnore
     private Member member;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "competition_id")
+    @MapsId("competition_code")
     @JsonIgnore
     private Competition competition;
     private Integer rank;

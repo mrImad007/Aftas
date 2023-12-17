@@ -25,7 +25,6 @@ public class CompetitionRequest {
     @NotEmpty
     @FutureOrPresent
     private Date date;
-    @NotEmpty(message = "code must be provided")
     private String code;
     @PastOrPresent(message = "start time must be provided at least today's")
     @NotEmpty(message = "start time must be provided")

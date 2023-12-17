@@ -10,8 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RankingDto {
-    @NotEmpty(message = "Identifier must be provided")
-    private Integer id;
     @NotEmpty(message = "Member must be provided")
     private Member member;
     @NotEmpty(message = "Competition must be provided")

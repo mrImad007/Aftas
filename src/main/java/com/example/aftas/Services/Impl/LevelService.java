@@ -31,15 +31,12 @@ public class LevelService implements LevelDao {
         return levelRepository.findAll().stream().map(levelMapper::mapTo).collect(Collectors.toList());
     }
 
-    public ResponseEntity<Object> findLevelByDescription(String descritpion){
+    public LevelDto findLevelByDescription(String descritpion){
         Optional<Level> levelOptional = levelRepository.findLevelByDescription(descritpion);
         if(levelOptional.isPresent()){
-            Level level = levelOptional.get();
-            LevelDto levelDto = levelMapper.mapTo(level);
-            return ResponseEntity.ok(levelDto);
+            return levelMapper.mapTo(levelOptional.get());
         }else{
-            String error = "No level found with this description: "+ descritpion;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            return null;
         }
     }
 }

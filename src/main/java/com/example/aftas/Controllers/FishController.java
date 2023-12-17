@@ -29,7 +29,6 @@ public class FishController {
         if (fishService.findFishByName(fishRequest.getName()) == null){
             return fishService.updateFish(fishRequest);
         }else {
-            System.out.println("Fish already existing");
             return null;
         }
     }

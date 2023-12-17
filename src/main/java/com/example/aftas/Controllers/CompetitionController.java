@@ -26,9 +26,6 @@ public class CompetitionController {
     }
     @PostMapping
     public CompetitionDto save(@RequestBody @NotNull CompetitionRequest competitionRequest) {
-        if(competitionService.getCompetitionByCode(competitionRequest.getCode()) != null){
-            return null;
-        }
         return competitionService.save(competitionRequest);
     }
     @DeleteMapping("/{code}")

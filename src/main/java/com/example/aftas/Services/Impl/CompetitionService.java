@@ -12,6 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,11 +53,51 @@ public class CompetitionService implements CompetitionDao {
     }
 
     public CompetitionDto save(CompetitionRequest competitionRequest) {
-        Competition competition = competitionRepository.save(competitionRequest.toModel());
-        return competitionMapper.mapTo(competition);
+        String code = codeGenerator(competitionRequest.getLocation(), competitionRequest.getDate());
+        competitionRequest.setCode(code);
+        if (getCompetitionByCode(code) == null){
+            Competition competition = competitionRepository.save(competitionRequest.toModel());
+            return competitionMapper.mapTo(competition);
+        }else{
+            return null;
+        }
+    }
+    public void updateCompetitionParticipantsNumber(Competition competition){
+        competitionRepository.save(competition);
+    }
+    public void deleteCompetition(String code){
+        competitionRepository.deleteById(code);
     }
 
-    public void deleteCompetition(String id){
-        competitionRepository.deleteById(id);
+    public boolean competitionValidity(String code){
+        Optional<Competition> competitionOptional = competitionRepository.findCompetitionByCode(code);
+        if (competitionOptional.isPresent()){
+            Competition competition = competitionOptional.get();
+
+            Date competitionDate = competition.getDate();
+            LocalDate localCompetitionDate = competitionDate.toLocalDate();
+
+            if (!localCompetitionDate.isBefore(LocalDate.now())){
+                Time startTime = competition.getStartTime();
+
+                LocalDateTime competitionStartDateTime = LocalDateTime.of(localCompetitionDate, startTime.toLocalTime());
+                Duration timeDifference = Duration.between(LocalDateTime.now(), competitionStartDateTime);
+
+                if (timeDifference.toHours() >= 24){
+                    if (competition.getNumberOfParticipants() <30 ){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public static String codeGenerator(String city, Date date) {
+        String codePrefix = city.substring(0, Math.min(city.length(), 3)).toLowerCase();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+        String dateSuffix = dateFormat.format(date);
+
+        return codePrefix + "-" + dateSuffix;
     }
 }

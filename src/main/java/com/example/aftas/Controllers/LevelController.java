@@ -2,6 +2,7 @@ package com.example.aftas.Controllers;
 
 import com.example.aftas.Services.Impl.LevelService;
 import com.example.aftas.model.Dto.LevelDto;
+import com.example.aftas.model.Entities.Level;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class LevelController {
         return levelService.getAllLevels();
     }
     @GetMapping("/description/{description}")
-    public ResponseEntity<Object> getLevelByDescription(@PathVariable("description") String description){
+    public LevelDto getLevelByDescription(@PathVariable("description") String description){
         return levelService.findLevelByDescription(description);
     }
 
