@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/fishes")
+@CrossOrigin("http://localhost:4200")
 public class FishController {
     private final FishService fishService;
 
@@ -22,6 +23,15 @@ public class FishController {
     @GetMapping
     public List<FishDto> getAll(){
         return fishService.getAllFishes();
+    }
+    @GetMapping("/{name}")
+    public FishDto findFishByName(@PathVariable("name") @NotNull String name){
+        return fishService.findFishByName(name);
+    }
+
+    @PostMapping("/checkWeight")
+    public boolean checkFishWeight(@RequestBody FishRequest fishRequest){
+        return fishService.checkAverageWeight(fishRequest);
     }
 
     @PostMapping

@@ -1,6 +1,7 @@
 package com.example.aftas.Services.Impl;
 
 import com.example.aftas.Dao.MemberDao;
+import com.example.aftas.exception.NotFound;
 import com.example.aftas.model.Dto.RankingDto;
 import com.example.aftas.model.Dto.Requests.MemberRequest;
 import com.example.aftas.model.Entities.Competition;
@@ -47,7 +48,7 @@ public class MemberService implements MemberDao{
             Member member = memberOptional.get();
             return memberMapper.mapTo(member);
         } else {
-            return null;
+            throw new NotFound("No member Found");
         }
     }
 
@@ -57,7 +58,7 @@ public class MemberService implements MemberDao{
             Member member = memberOptional.get();
             return memberMapper.mapTo(member);
         }else {
-            return null;
+            throw new NotFound("no member Found");
         }
     }
     public List<MemberDto> getMemberByName(String name) {
@@ -86,6 +87,7 @@ public class MemberService implements MemberDao{
             Member savedMember = memberRepository.save(member);
             return memberMapper.mapTo(savedMember);
         }else {
+            System.out.println("already existing");
             return null;
         }
 

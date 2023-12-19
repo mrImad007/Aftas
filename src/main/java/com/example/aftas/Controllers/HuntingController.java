@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/huntings")
+@CrossOrigin("http://localhost:4200")
 public class HuntingController {
     private final HuntingService huntingService;
 
@@ -25,7 +26,6 @@ public class HuntingController {
     public List<HuntingDto> getHuntingByCompetitionCode(@PathVariable("code") String code){
         return huntingService.findHuntingByCompetitionCode(code);
     }
-
     @PostMapping
     public HuntingDto add(@RequestBody HuntingRequest huntingRequest){
          return huntingService.addHunting(huntingRequest);

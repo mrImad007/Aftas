@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/rankings")
+@CrossOrigin("http://localhost:4200")
 public class RankingController {
     private final RankingService rankingService;
     private final CompetitionService competitionService;
@@ -26,7 +27,12 @@ public class RankingController {
     public List<RankingDto> getAllRankings(){
         return rankingService.getAllRankings();
     }
-    @GetMapping("{code}")
+
+    @GetMapping("/result/{code}")
+    public List<RankingDto> getResult(@PathVariable("code") String code){
+        return rankingService.getResult(code);
+    }
+    @GetMapping("/{code}")
     public List<Ranking> findCompetionRanking(@PathVariable("code") @NotNull String code){
         return rankingService.findRankingbyCompetitionCode(code);
     }
@@ -34,7 +40,6 @@ public class RankingController {
     public RankingDto addRanking(@RequestBody @NotNull RankingRequest rankingRequest){
         return rankingService.addRanking(rankingRequest);
     }
-
     @DeleteMapping("/{identityNum}")
     public boolean deleteRanking(@PathVariable("identityNum") @NotNull Integer identityNum){
         return rankingService.deleteRanking(identityNum);

@@ -9,7 +9,8 @@ import com.example.aftas.model.Entities.Member;
 import com.example.aftas.model.mappers.Mapper;
 import com.example.aftas.repository.CompetitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -18,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,9 +62,7 @@ public class CompetitionService implements CompetitionDao {
             return null;
         }
     }
-    public void updateCompetitionParticipantsNumber(Competition competition){
-        competitionRepository.save(competition);
-    }
+
     public void deleteCompetition(String code){
         competitionRepository.deleteById(code);
     }
@@ -99,5 +97,14 @@ public class CompetitionService implements CompetitionDao {
         String dateSuffix = dateFormat.format(date);
 
         return codePrefix + "-" + dateSuffix;
+    }
+
+    public Page<CompetitionDto> findAllPaginated(Pageable pageable){
+        Page<Competition> competitionsPage = competitionRepository.findAll(pageable);
+        if (!competitionsPage.isEmpty()){
+            return competitionsPage.map(competitionMapper::mapTo);
+        }else {
+            return null;
+        }
     }
 }

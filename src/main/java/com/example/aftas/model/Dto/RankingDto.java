@@ -11,9 +11,9 @@ import lombok.*;
 @Builder
 public class RankingDto {
     @NotEmpty(message = "Member must be provided")
-    private Member member;
+    private MemberDto member;
     @NotEmpty(message = "Competition must be provided")
-    private Competition competition;
+    private CompetitionDto competition;
     @NotEmpty(message = "Rank must be provided")
     private Integer rank;
     @NotEmpty(message = "Score must be provided")

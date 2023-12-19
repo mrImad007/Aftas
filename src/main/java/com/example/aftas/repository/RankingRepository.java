@@ -1,5 +1,6 @@
 package com.example.aftas.repository;
 
+import com.example.aftas.model.Dto.RankingDto;
 import com.example.aftas.model.Entities.Competition;
 import com.example.aftas.model.Entities.Member;
 import com.example.aftas.model.Entities.Ranking;
@@ -19,5 +20,6 @@ public interface RankingRepository extends JpaRepository<Ranking, RankingId> {
     List<Ranking> findRankingByCompetitionCode(String code);
     List<Ranking> findByCompetition(Competition competition);
     Optional<Ranking> findRankingByMemberNum(Integer num);
-
+    List<Ranking> findTop3ByCompetitionCodeOrderByScoreDesc(String code);
+    List<Ranking> findByMemberNumAndCompetitionCode(Integer num, String code);
 }

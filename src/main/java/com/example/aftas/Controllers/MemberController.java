@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/members")
+@CrossOrigin("http://localhost:4200")
 public class MemberController {
     private final MemberService memberService;
     private final Mapper<Member, MemberDto> memberMapper;
@@ -55,7 +56,13 @@ public class MemberController {
 
     @DeleteMapping("/{identity}")
     public boolean deleteMember(@PathVariable("identity") String identityNumber){
+        System.out.println("=========================================");
+        System.out.println("identity : "+identityNumber);
+        System.out.println("=========================================");
         MemberDto memberDto = memberService.getMemberByIdentityNumber(identityNumber);
+        System.out.println("=========================================");
+        System.out.println(memberDto);
+        System.out.println("=========================================");
         if (memberDto != null){
             memberService.deleteMember(memberMapper.mapFrom(memberDto));
             return true;

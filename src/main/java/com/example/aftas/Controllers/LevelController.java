@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/levels")
+@CrossOrigin("http://localhost:4200")
 public class LevelController {
     private final LevelService levelService;
 
