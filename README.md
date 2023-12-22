@@ -1,5 +1,6 @@
 #  Aftas
 Une application de gestion des compétitions de chasse sous-marine(AFTAS)
+Parite BackEnd (API - SpringBoot/JPA)
 
 # Contexte du projet
 Aftas est un club de sports à Tiznit, situé exactement à Mirleft, il propose un ensemble de services et d'activités : Surf, Tennis, Quad, Pêche sous-marine, Parapente, et autres.
